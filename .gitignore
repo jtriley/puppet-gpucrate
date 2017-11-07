@@ -1,0 +1,22 @@
+#Side effects from Module packaging.
+pkg/
+
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags
+
+# gem lock file
+Gemfile.lock
+
+# bundle
+.bundle/*
+
+# fixtures
+spec/fixtures/*
