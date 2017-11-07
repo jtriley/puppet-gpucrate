@@ -29,13 +29,27 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Justin Riley
 #
 # === Copyright
 #
-# Copyright 2017 Your name here, unless otherwise noted.
+# Copyright 2017 Justin Riley, unless otherwise noted.
 #
-class gpucrate {
+class gpucrate (
+  $version         = $gpucrate::params::version,
+  $package_name    = $gpucrate::params::package_name,
+  $pip_params      = $gpucrate::params::pip_params,
+  $volume_root     = $gpucrate::params::volume_root,
+  $config_dir      = $gpucrate::params::config_dir,
+  $config_file     = $gpucrate::params::config_file,
+) inherits gpucrate::params {
 
+  class { 'gpucrate::install': } ->
+  class { 'gpucrate::config': } ->
+  class { 'gpucrate::create': }
+
+  contain 'gpucrate::install'
+  contain 'gpucrate::config'
+  contain 'gpucrate::create'
 
 }

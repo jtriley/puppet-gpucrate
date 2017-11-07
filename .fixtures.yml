@@ -1,0 +1,8 @@
+fixtures:
+  forge_modules:
+    stdlib: 'puppetlabs-stdlib'
+    python: 'stankevich-python'
+    epel: 'stahnma/epel'
+    singularity: 'treydock-singularity'
+  symlinks:
+    gpucrate: "#{source_dir}"
