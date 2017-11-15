@@ -8,6 +8,8 @@ describe 'gpucrate', :type => :class do
 
       let(:facts) { Static::OSFACTS[osfamily] }
 
+      default_volume_root = '/usr/local/gpucrate'
+
       it { should compile.with_all_deps }
       it { should contain_class('gpucrate') }
       it { should contain_class('gpucrate::params') }
@@ -18,8 +20,13 @@ describe 'gpucrate', :type => :class do
       it { should contain_file('gpucrate config directory').with_path('/etc/gpucrate') }
       it { should contain_file('gpucrate config file').with_path('/etc/gpucrate/config.yaml') }
       it { should contain_exec('create gpucrate volume').with_command('/usr/bin/gpucrate create') }
+      it { should contain_exec('create gpucrate volume').with_creates("#{default_volume_root}/384.81") }
       it { should contain_python__pip('gpucrate') }
 
+      context "with empty nvidia_driver_version" do
+        let(:facts) { Static::OSFACTS[osfamily].merge({ 'nvidia_driver_version' => '' }) }
+        it { should_not contain_exec('create gpucrate volume') }
+      end
     end
   end
 end
