@@ -28,6 +28,12 @@ describe 'gpucrate', :type => :class do
         let(:facts) { Static::OSFACTS[osfamily].merge({ 'nvidia_driver_version' => '' }) }
         it { should_not contain_exec('create gpucrate volume') }
       end
+
+      context "with custom pip install params" do
+        venv_path = '/path/to/a/virtualenv'
+        let(:params) { { 'pip_params' => { 'virtualenv' => venv_path } } }
+        it { should contain_python__pip('gpucrate').with_virtualenv(venv_path) }
+      end
     end
   end
 end
