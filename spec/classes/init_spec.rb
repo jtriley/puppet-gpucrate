@@ -19,6 +19,7 @@ describe 'gpucrate', :type => :class do
 
       it { should contain_file('gpucrate config directory').with_path('/etc/gpucrate') }
       it { should contain_file('gpucrate config file').with_path('/etc/gpucrate/config.yaml') }
+      it { should contain_file('gpucrate config file').with_content(/volume_root: #{default_volume_root}/) }
       it { should contain_exec('create gpucrate volume').with_command('/usr/bin/gpucrate create') }
       it { should contain_exec('create gpucrate volume').with_creates("#{default_volume_root}/384.81") }
       it { should contain_python__pip('gpucrate') }
