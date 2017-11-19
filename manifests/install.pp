@@ -12,6 +12,6 @@ class gpucrate::install {
   }
 
   create_resources('python::pip', {
-    $gpucrate::package_name => merge($default_pip_params, $gpucrate::pip_params),
+    "${gpucrate::package_name}" => merge($default_pip_params, $gpucrate::pip_params),
   })
 }
